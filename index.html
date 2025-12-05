@@ -50,29 +50,29 @@
             opacity: 0.9;
         }
 
-        /* --- BOTÃO AMARELO (NOVO ESTILO) --- */
+        /* Botão Amarelo Ouro */
         .cta-button {
-            background: #FFD700; /* Amarelo Ouro */
-            color: #000000;      /* Texto Preto */
+            background: #FFD700;
+            color: #000000;
             padding: 6px 16px;
             border-radius: 20px;
             text-decoration: none;
-            font-weight: 800;    /* Negrito Extra */
+            font-weight: 800;
             font-size: 13px;
             transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            box-shadow: 0 0 5px rgba(255, 215, 0, 0.3); /* Brilho suave */
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
         }
 
         .cta-button:hover {
-            background: #FFC107; /* Amarelo um pouco mais escuro */
+            background: #FFC107;
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); /* Brilho mais forte no hover */
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
         }
 
-        /* Container Principal */
+        /* Layout Principal */
         .main-container-wrapper {
             flex: 1;
             display: flex;
@@ -315,6 +315,26 @@
         }
         button.secondary-btn:hover { background: #556677; }
 
+        /* Botão Download QR (Novo) */
+        button.btn-download-qr {
+            width: 100%;
+            padding: 10px;
+            background: white;
+            color: #333;
+            border: 2px dashed #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.2s;
+        }
+        button.btn-download-qr:hover {
+            border-color: #25D366;
+            color: #25D366;
+            background: #f0fff4;
+        }
+
         #result { display: none; animation: fadeIn 0.4s; text-align: center; }
         
         .link-container {
@@ -334,7 +354,7 @@
         .btn-open { background: #25D366; }
         .action-btn:hover { opacity: 0.9; }
 
-        #qrcode { display: flex; justify-content: center; padding: 15px; background: white; border-radius: 8px; margin: 0 auto 20px auto; }
+        #qrcode { display: flex; justify-content: center; padding: 15px; background: white; border-radius: 8px; margin: 0 auto 10px auto; }
 
         /* Emoji Panel */
         .emoji-panel {
@@ -376,7 +396,6 @@
             padding: 10px;
         }
 
-        /* Footer Discreto */
         .footer-credit {
             margin-top: auto;
             padding-top: 20px;
@@ -399,41 +418,17 @@
 
         /* Responsividade */
         @media (max-width: 900px) {
-            .top-cta-bar {
-                flex-direction: column;
-                gap: 8px;
-                padding: 15px;
-            }
-            .main-wrapper {
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
-            .preview-section {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                flex: none;
-                margin-top: 20px;
-            }
-            .phone-mockup {
-                transform: scale(0.9);
-                transform-origin: center top;
-            }
+            .top-cta-bar { flex-direction: column; gap: 8px; padding: 15px; }
+            .main-wrapper { flex-direction: column; align-items: center; gap: 20px; }
+            .preview-section { width: 100%; display: flex; justify-content: center; flex: none; margin-top: 20px; }
+            .phone-mockup { transform: scale(0.9); transform-origin: center top; }
         }
 
         @media (max-width: 480px) {
             .main-container-wrapper { padding: 10px 0; }
             .card-section { padding: 20px; border-radius: 0; min-height: auto; }
-            .phone-mockup {
-                width: 280px;
-                height: 520px;
-                transform: none;
-                margin-bottom: 20px;
-            }
+            .phone-mockup { width: 280px; height: 520px; transform: none; margin-bottom: 20px; }
             .whatsapp-header-logo i { font-size: 50px; }
-            
-            /* Ajuste para telas muito pequenas */
             .top-cta-bar span { font-size: 13px; }
         }
     </style>
@@ -510,6 +505,9 @@
                     
                     <h3>📷 QR Code Gerado:</h3>
                     <div id="qrcode"></div>
+                    <button class="btn-download-qr" onclick="downloadQRCode()">
+                        <i class="fas fa-download"></i> Baixar QR Code (PNG)
+                    </button>
                     
                     <button type="button" class="secondary-btn" onclick="resetForm()">
                         <i class="fas fa-redo"></i> Gerar Novo Link
@@ -568,18 +566,12 @@
         const countrySelect = document.getElementById('country');
         const emojiGrid = document.getElementById('emojiGrid');
 
-        // URL da API de Países
         const COUNTRIES_URL = "https://gist.githubusercontent.com/anubhavshrimal/75f6183458db8c453306f93521e93d37/raw/CountryCodes.json";
-        
-        // URL da API de Emojis (Local)
         const EMOJIS_URL = "array.json";
-
-        // Fallback de Emojis
         const FALLBACK_EMOJIS = [
             "😊","😂","🤣","😍","🙏","👍","🔥","✅","❤️","😭","😘","🤔","😊","🙄","😫","😩","😤","😠","😡","🤬","🤯","😳","🥵","🥶","😱","😨","😰","😥","😓","🤗","🤔","🤭","🤫","🤥","😶","😐","😑","😬","🙄","😯","😦","😧","😮","😲","🥱","😴","🤤","😪","😵","🤐","🥴","🤢","🤮","🤧","😷","🤒","🤕","🤑","🤠","😈","👿","👹","👺","🤡","💩","👻","💀","☠️","👽","👾","🤖"
         ];
 
-        // Carregar Países
         async function loadCountries() {
             try {
                 const response = await fetch(COUNTRIES_URL);
@@ -600,7 +592,6 @@
             }
         }
 
-        // Função auxiliar para renderizar botões
         function renderEmojiButtons(list, isObject = true) {
             emojiGrid.innerHTML = '';
             const fragment = document.createDocumentFragment();
@@ -623,7 +614,6 @@
             emojiGrid.appendChild(fragment);
         }
 
-        // Carregar Emojis do Arquivo Local
         async function loadEmojis() {
             try {
                 const response = await fetch(EMOJIS_URL);
@@ -643,7 +633,6 @@
             }
         }
 
-        // Inicialização
         loadCountries();
         loadEmojis();
 
@@ -738,6 +727,23 @@
             textarea.value = textarea.value.substring(0, start) + emoji + textarea.value.substring(textarea.selectionEnd);
             updatePreview();
             textarea.focus();
+        }
+
+        // Função de Download do QR Code
+        function downloadQRCode() {
+            const qrContainer = document.getElementById('qrcode');
+            const img = qrContainer.querySelector('img');
+            
+            if (img && img.src) {
+                const link = document.createElement('a');
+                link.href = img.src;
+                link.download = 'qrcode-whatsapp.png';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert("Erro ao baixar QR Code. Tente gerar novamente.");
+            }
         }
 
         document.getElementById('whatsappForm').addEventListener('submit', function(e) {
