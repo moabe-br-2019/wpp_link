@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Gerador de Link WhatsApp Personalizado com QR Code [Grátis] | Crie em 1 Clique</title>
+    <meta name="description" content="Aumente suas vendas com nosso Gerador de Link para WhatsApp Gratuito. Crie links com mensagem personalizada e QR Code para Bio do Instagram, Landing Pages e Negócios. Rápido, seguro e sem cadastro. Ferramenta oficial Mowebstudio.">
+    <meta name="keywords" content="gerador link whatsapp, link whatsapp personalizado, qr code whatsapp, link whatsapp bio instagram, api whatsapp, criar link wpp, mowebstudio">
+    <meta name="robots" content="index, follow">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #00a884 0%, #128C7E 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- BARRA CTA DE TOPO --- */
+        .top-cta-bar {
+            width: 100%;
+            background: #111b21;
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .top-cta-bar span {
+            opacity: 0.9;
+        }
+
+        /* --- BOTÃO AMARELO (NOVO ESTILO) --- */
+        .cta-button {
+            background: #FFD700; /* Amarelo Ouro */
+            color: #000000;      /* Texto Preto */
+            padding: 6px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 800;    /* Negrito Extra */
+            font-size: 13px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.3); /* Brilho suave */
+        }
+
+        .cta-button:hover {
+            background: #FFC107; /* Amarelo um pouco mais escuro */
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6); /* Brilho mais forte no hover */
+        }
+
+        /* Container Principal */
+        .main-container-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 40px 20px;
+        }
+
+        .main-wrapper {
+            display: flex;
+            gap: 40px;
+            max-width: 1000px;
+            width: 100%;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        /* Card Section */
+        .card-section {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            flex: 1;
+            max-width: 500px;
+            width: 100%;
+            animation: slideIn 0.5s ease-out;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 600px;
+            z-index: 2;
+        }
+
+        .preview-section {
+            flex: 0 0 300px;
+            position: sticky;
+            top: 20px;
+            animation: slideIn 0.6s ease-out;
+            z-index: 1;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mockup do Celular */
+        .phone-mockup {
+            width: 300px;
+            height: 600px;
+            background: #fff;
+            border-radius: 40px;
+            border: 12px solid #2c3e50;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            margin: 0 auto;
+            transition: all 0.3s ease;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 25px;
+            background: #2c3e50;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
+        }
+
+        .wa-header {
+            background: #008069;
+            height: 70px;
+            padding: 30px 15px 10px 15px;
+            display: flex;
+            align-items: center;
+            color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 5;
+        }
+
+        .wa-avatar {
+            width: 35px;
+            height: 35px;
+            background: #ccc;
+            border-radius: 50%;
+            margin-right: 10px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>');
+            background-size: cover;
+        }
+
+        .wa-contact-info { flex: 1; overflow: hidden; }
+        .wa-name { font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .wa-status { font-size: 11px; opacity: 0.8; }
+
+        .wa-body {
+            height: calc(100% - 120px);
+            background-color: #e5ddd5;
+            background-image: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+            opacity: 0.9;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .message-bubble {
+            background: #e7ffdb;
+            padding: 8px 10px;
+            border-radius: 8px;
+            border-top-right-radius: 0;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+            max-width: 90%;
+            align-self: flex-end;
+            position: relative;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #111b21;
+            word-wrap: break-word;
+            min-width: 100px;
+        }
+
+        .message-bubble::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -8px;
+            width: 0;
+            height: 0;
+            border: 8px solid transparent;
+            border-top-color: #e7ffdb;
+            border-left-color: #e7ffdb;
+            border-right: 0;
+            border-bottom: 0;
+        }
+
+        .message-meta { display: flex; justify-content: flex-end; align-items: center; margin-top: 4px; gap: 3px; }
+        .message-time { font-size: 10px; color: #667781; }
+        .message-ticks { color: #53bdeb; font-size: 10px; font-weight: bold; }
+
+        .wa-input-bar {
+            height: 50px;
+            background: #f0f2f5;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            border-top: 1px solid #ddd;
+        }
+        .wa-input-fake { background: white; height: 35px; border-radius: 20px; flex: 1; margin: 0 10px; border: 1px solid #fff; }
+
+        /* Estilos do Formulário */
+        h1 { color: #333; text-align: center; margin-bottom: 10px; font-size: 24px; font-weight: 700; }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .whatsapp-header-logo { text-align: center; margin-bottom: 20px; }
+        .whatsapp-header-logo i {
+            font-size: 70px;
+            color: #25D366;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            transition: transform 0.3s;
+        }
+        .whatsapp-header-logo i:hover { transform: scale(1.1); }
+
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 6px; color: #555; font-weight: 600; font-size: 13px; }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            background: #f9f9f9;
+        }
+        select:focus, input:focus { outline: none; border-color: #25D366; background: #fff; box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1); }
+
+        .editor-container { border: 1px solid #ddd; border-radius: 8px; overflow: hidden; background: #f9f9f9; }
+        .editor-toolbar { background: #eee; border-bottom: 1px solid #ddd; padding: 8px; display: flex; gap: 5px; flex-wrap: wrap; }
+        
+        .toolbar-btn {
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+            transition: all 0.2s;
+        }
+        .toolbar-btn:hover { background: #e9e9e9; color: #075E54; }
+
+        #message { width: 100%; padding: 12px; border: none; resize: vertical; min-height: 120px; font-family: inherit; background: #fff; outline: none; }
+
+        button.primary-btn {
+            width: 100%;
+            padding: 15px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            margin-top: 10px;
+            box-shadow: 0 4px 6px rgba(37, 211, 102, 0.2);
+        }
+        button.primary-btn:hover { background: #20bd5a; transform: translateY(-2px); }
+
+        button.secondary-btn {
+            width: 100%;
+            padding: 12px;
+            background: #667781;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        button.secondary-btn:hover { background: #556677; }
+
+        #result { display: none; animation: fadeIn 0.4s; text-align: center; }
+        
+        .link-container {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            word-break: break-all;
+            text-align: left;
+        }
+        .link-text { color: #075E54; text-decoration: none; font-size: 13px; }
+
+        .button-group { display: flex; gap: 10px; margin-bottom: 20px; }
+        .action-btn { flex: 1; padding: 12px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; display: flex; justify-content: center; align-items: center; gap: 8px; color: white; transition: opacity 0.2s; }
+        .btn-copy { background: #3498db; }
+        .btn-open { background: #25D366; }
+        .action-btn:hover { opacity: 0.9; }
+
+        #qrcode { display: flex; justify-content: center; padding: 15px; background: white; border-radius: 8px; margin: 0 auto 20px auto; }
+
+        /* Emoji Panel */
+        .emoji-panel {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 8px;
+            width: 280px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            z-index: 100;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        .emoji-panel.show { display: block; }
+        
+        .emoji-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+        }
+        
+        .emoji-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background 0.1s;
+        }
+        .emoji-btn:hover { background: #e0e0e0; }
+        
+        .emoji-loading {
+            text-align: center;
+            color: #777;
+            font-size: 13px;
+            padding: 10px;
+        }
+
+        /* Footer Discreto */
+        .footer-credit {
+            margin-top: auto;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #eee;
+        }
+        .footer-credit a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-credit a:hover {
+            color: #25D366;
+        }
+
+        .toast { position: fixed; top: 20px; right: 20px; background: #333; color: white; padding: 12px 24px; border-radius: 50px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: none; z-index: 1000; font-size: 14px; }
+        .toast.show { display: block; animation: slideIn 0.3s; }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .top-cta-bar {
+                flex-direction: column;
+                gap: 8px;
+                padding: 15px;
+            }
+            .main-wrapper {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .preview-section {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                flex: none;
+                margin-top: 20px;
+            }
+            .phone-mockup {
+                transform: scale(0.9);
+                transform-origin: center top;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container-wrapper { padding: 10px 0; }
+            .card-section { padding: 20px; border-radius: 0; min-height: auto; }
+            .phone-mockup {
+                width: 280px;
+                height: 520px;
+                transform: none;
+                margin-bottom: 20px;
+            }
+            .whatsapp-header-logo i { font-size: 50px; }
+            
+            /* Ajuste para telas muito pequenas */
+            .top-cta-bar span { font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-cta-bar">
+        <span> Precisa de um site profissional ou automação para seu negócio?</span>
+        <a href="https://mowebstudio.com" target="_blank" class="cta-button">
+            Conheça a Mowebstudio <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <div class="main-container-wrapper">
+        <div class="main-wrapper">
+            <div class="card-section">
+                <div class="whatsapp-header-logo">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                
+                <h1 id="pageTitle">Gerador de Link WhatsApp</h1>
+                <p class="subtitle">Crie seu link personalizado com QR Code e mensagem pronta para a Bio do Instagram.</p>
+                
+                <div id="formInputs">
+                    <form id="whatsappForm">
+                        <div class="form-group">
+                            <label for="country">País</label>
+                            <select id="country" required>
+                                <option value="" disabled selected>Carregando países...</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Número do Celular</label>
+                            <input type="tel" id="phone" placeholder="(11) 99999-8888" maxlength="15" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Sua Mensagem</label>
+                            <div class="editor-container">
+                                <div class="editor-toolbar">
+                                    <button type="button" class="toolbar-btn" onclick="formatText('bold')" title="Negrito"><i class="fas fa-bold"></i></button>
+                                    <button type="button" class="toolbar-btn" onclick="formatText('italic')" title="Itálico"><i class="fas fa-italic"></i></button>
+                                    <button type="button" class="toolbar-btn" onclick="formatText('strike')" title="Tachado"><i class="fas fa-strikethrough"></i></button>
+                                    <button type="button" class="toolbar-btn" onclick="insertList('bullet')" title="Lista Marcadores"><i class="fas fa-list-ul"></i></button>
+                                    <button type="button" class="toolbar-btn" onclick="insertList('number')" title="Lista Numerada"><i class="fas fa-list-ol"></i></button>
+                                    <button type="button" class="toolbar-btn" onclick="toggleEmoji()" title="Emoji"><i class="far fa-smile"></i></button>
+                                </div>
+                                
+                                <div id="emojiPanel" class="emoji-panel">
+                                    <div id="emojiGrid" class="emoji-grid">
+                                        <div class="emoji-loading">Carregando...</div>
+                                    </div>
+                                </div>
+
+                                <textarea id="message" placeholder="Digite sua mensagem opcional aqui..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="primary-btn">Gerar Link Grátis e QR Code</button>
+                    </form>
+                </div>
+                
+                <div id="result">
+                    <h3>🚀 Seu Link está Pronto!</h3>
+                    <div class="link-container">
+                        <a href="#" id="generatedLink" class="link-text" target="_blank">https://wa.me/...</a>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button class="action-btn btn-copy" onclick="copyLink()"><i class="fas fa-copy"></i> Copiar Link</button>
+                        <button class="action-btn btn-open" onclick="openWhatsApp()"><i class="fab fa-whatsapp"></i> Abrir WhatsApp</button>
+                    </div>
+                    
+                    <h3>📷 QR Code Gerado:</h3>
+                    <div id="qrcode"></div>
+                    
+                    <button type="button" class="secondary-btn" onclick="resetForm()">
+                        <i class="fas fa-redo"></i> Gerar Novo Link
+                    </button>
+                </div>
+
+                <div class="footer-credit">
+                    Ferramenta desenvolvida por <a href="https://mowebstudio.com" target="_blank">Mowebstudio</a>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="wa-header">
+                        <div class="wa-avatar"></div>
+                        <div class="wa-contact-info">
+                            <div class="wa-name" id="previewName">Seu Número</div>
+                            <div class="wa-status">online</div>
+                        </div>
+                    </div>
+                    <div class="wa-body">
+                        <div class="message-bubble" id="previewBubble" style="display:none;">
+                            <span class="chat-message-content" id="previewText"></span>
+                            <div class="message-meta">
+                                <span class="message-time" id="previewTime">10:30</span>
+                                <span class="message-ticks">✓✓</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wa-input-bar">
+                        <span style="font-size:20px; color:#777;">+</span>
+                        <div class="wa-input-fake"></div>
+                        <span style="font-size:20px; color:#777;">🎙️</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast">Link copiado com sucesso!</div>
+
+    <script>
+        let generatedUrl = '';
+        let qrcodeObj = null;
+
+        const phoneInput = document.getElementById('phone');
+        const messageInput = document.getElementById('message');
+        const previewBubble = document.getElementById('previewBubble');
+        const previewText = document.getElementById('previewText');
+        const previewName = document.getElementById('previewName');
+        const previewTime = document.getElementById('previewTime');
+        const formInputs = document.getElementById('formInputs');
+        const resultDiv = document.getElementById('result');
+        const pageTitle = document.getElementById('pageTitle');
+        const countrySelect = document.getElementById('country');
+        const emojiGrid = document.getElementById('emojiGrid');
+
+        // URL da API de Países
+        const COUNTRIES_URL = "https://gist.githubusercontent.com/anubhavshrimal/75f6183458db8c453306f93521e93d37/raw/CountryCodes.json";
+        
+        // URL da API de Emojis (Local)
+        const EMOJIS_URL = "array.json";
+
+        // Fallback de Emojis
+        const FALLBACK_EMOJIS = [
+            "😊","😂","🤣","😍","🙏","👍","🔥","✅","❤️","😭","😘","🤔","😊","🙄","😫","😩","😤","😠","😡","🤬","🤯","😳","🥵","🥶","😱","😨","😰","😥","😓","🤗","🤔","🤭","🤫","🤥","😶","😐","😑","😬","🙄","😯","😦","😧","😮","😲","🥱","😴","🤤","😪","😵","🤐","🥴","🤢","🤮","🤧","😷","🤒","🤕","🤑","🤠","😈","👿","👹","👺","🤡","💩","👻","💀","☠️","👽","👾","🤖"
+        ];
+
+        // Carregar Países
+        async function loadCountries() {
+            try {
+                const response = await fetch(COUNTRIES_URL);
+                const countries = await response.json();
+                countrySelect.innerHTML = '';
+                countries.forEach(country => {
+                    const option = document.createElement('option');
+                    const code = country.dial_code.replace('+', '');
+                    option.value = code;
+                    option.textContent = `${country.name} (+${code})`;
+                    if (country.code === 'BR') option.selected = true;
+                    countrySelect.appendChild(option);
+                });
+                if (countrySelect.options.length === 0) countrySelect.innerHTML = '<option value="55">Brazil (+55)</option>';
+            } catch (error) {
+                console.error("Erro ao carregar países:", error);
+                countrySelect.innerHTML = '<option value="55">Brasil (+55)</option>';
+            }
+        }
+
+        // Função auxiliar para renderizar botões
+        function renderEmojiButtons(list, isObject = true) {
+            emojiGrid.innerHTML = '';
+            const fragment = document.createDocumentFragment();
+            const limit = 800;
+            let count = 0;
+
+            list.forEach(item => {
+                if (count >= limit) return;
+                const char = isObject ? item.char : item;
+                if (char) {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'emoji-btn';
+                    btn.textContent = char;
+                    btn.onclick = () => insertEmoji(char);
+                    fragment.appendChild(btn);
+                    count++;
+                }
+            });
+            emojiGrid.appendChild(fragment);
+        }
+
+        // Carregar Emojis do Arquivo Local
+        async function loadEmojis() {
+            try {
+                const response = await fetch(EMOJIS_URL);
+                if (!response.ok) throw new Error('Falha ao carregar arquivo local');
+                
+                const data = await response.json();
+                
+                if (data.emojis && Array.isArray(data.emojis)) {
+                    renderEmojiButtons(data.emojis, false);
+                } else {
+                    renderEmojiButtons(data, true); 
+                }
+                
+            } catch (error) {
+                console.warn("Erro ao carregar array.json:", error);
+                renderEmojiButtons(FALLBACK_EMOJIS, false);
+            }
+        }
+
+        // Inicialização
+        loadCountries();
+        loadEmojis();
+
+        function updateTime() {
+            const now = new Date();
+            previewTime.innerText = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+        }
+
+        function updatePreview() {
+            const msg = messageInput.value;
+            const phone = phoneInput.value;
+            const countryCode = countrySelect.value || "55";
+            
+            if (phone.length > 2) {
+                previewName.innerText = `+${countryCode} ${phone}`;
+            } else {
+                previewName.innerText = "Seu Número";
+            }
+
+            if (msg.trim()) {
+                previewBubble.style.display = 'block';
+                let html = msg
+                    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+                    .replace(/\n/g, '<br>')
+                    .replace(/\*([^*]+)\*/g, '<strong>$1</strong>')
+                    .replace(/_([^_]+)_/g, '<em>$1</em>')
+                    .replace(/~([^~]+)~/g, '<s>$1</s>');
+                
+                previewText.innerHTML = html;
+                updateTime();
+            } else {
+                previewBubble.style.display = 'none';
+            }
+        }
+
+        countrySelect.addEventListener('change', updatePreview);
+
+        phoneInput.addEventListener('input', function(e) {
+            let v = e.target.value.replace(/\D/g, "");
+            if (v.length > 15) v = v.substring(0, 15);
+            if (v.length > 2) v = `(${v.substring(0,2)}) ${v.substring(2)}`;
+            if (v.length > 9) v = `${v.substring(0,10)}-${v.substring(10)}`;
+            e.target.value = v;
+            updatePreview();
+        });
+
+        messageInput.addEventListener('input', updatePreview);
+
+        function formatText(type) {
+            const textarea = document.getElementById('message');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const sel = textarea.value.substring(start, end);
+            let wrap = '';
+            
+            if (type === 'bold') wrap = '*';
+            if (type === 'italic') wrap = '_';
+            if (type === 'strike') wrap = '~';
+
+            textarea.value = textarea.value.substring(0, start) + wrap + sel + wrap + textarea.value.substring(end);
+            updatePreview();
+            textarea.focus();
+        }
+
+        function insertList(type) {
+            const textarea = document.getElementById('message');
+            const start = textarea.selectionStart;
+            const text = textarea.value;
+            const before = text.substring(0, start);
+            const after = text.substring(start);
+            const needsNewLine = (start > 0 && !before.endsWith('\n'));
+            
+            let listText = '';
+            if (type === 'bullet') {
+                listText = (needsNewLine ? '\n' : '') + '- Item 1\n- Item 2\n- Item 3';
+            } else {
+                listText = (needsNewLine ? '\n' : '') + '1. Item 1\n2. Item 2\n3. Item 3';
+            }
+            
+            textarea.value = before + listText + after;
+            updatePreview();
+            textarea.focus();
+        }
+
+        function toggleEmoji() {
+            document.getElementById('emojiPanel').classList.toggle('show');
+        }
+
+        function insertEmoji(emoji) {
+            const textarea = document.getElementById('message');
+            const start = textarea.selectionStart;
+            textarea.value = textarea.value.substring(0, start) + emoji + textarea.value.substring(textarea.selectionEnd);
+            updatePreview();
+            textarea.focus();
+        }
+
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const countryCode = document.getElementById('country').value;
+            const phone = document.getElementById('phone').value.replace(/\D/g, '');
+            const msg = document.getElementById('message').value;
+
+            if (!phone) {
+                alert("Por favor, digite o número.");
+                return;
+            }
+
+            const fullPhone = countryCode + phone;
+            let url = `https://wa.me/${fullPhone}`;
+            if (msg) url += `?text=${encodeURIComponent(msg)}`;
+
+            generatedUrl = url;
+            
+            formInputs.style.display = 'none';
+            resultDiv.style.display = 'block';
+            pageTitle.innerText = "Link Gerado com Sucesso!";
+
+            const linkEl = document.getElementById('generatedLink');
+            linkEl.href = url;
+            linkEl.innerText = url;
+
+            document.getElementById('qrcode').innerHTML = "";
+            qrcodeObj = new QRCode(document.getElementById('qrcode'), {
+                text: url, width: 180, height: 180,
+                colorDark : "#000000", colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+
+        function resetForm() {
+            formInputs.style.display = 'block';
+            resultDiv.style.display = 'none';
+            pageTitle.innerText = "Gerador de Link WhatsApp";
+            document.getElementById('whatsappForm').reset();
+            
+            const brOption = Array.from(countrySelect.options).find(opt => opt.text.includes('Brazil') || opt.text.includes('Brasil'));
+            if(brOption) countrySelect.value = brOption.value;
+
+            document.getElementById('previewBubble').style.display = 'none';
+            document.getElementById('previewName').innerText = "Seu Número";
+            generatedUrl = '';
+        }
+
+        function copyLink() {
+            if(!generatedUrl) return;
+            navigator.clipboard.writeText(generatedUrl).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
+            });
+        }
+
+        function openWhatsApp() {
+            if(generatedUrl) window.open(generatedUrl, '_blank');
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.emoji-panel') && !e.target.closest('.toolbar-btn')) {
+                document.getElementById('emojiPanel').classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>
