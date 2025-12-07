@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MN5LWF2DMN"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -16,9 +15,58 @@
 
     <title>Gerador de Link WhatsApp Personalizado com QR Code [Grátis] | Crie em 1 Clique</title>
     <meta name="description" content="Aumente suas vendas com nosso Gerador de Link para WhatsApp Gratuito. Crie links com mensagem personalizada e QR Code para Bio do Instagram, Landing Pages e Negócios. Rápido, seguro e sem cadastro. Ferramenta oficial Mowebstudio.">
-    <meta name="keywords" content="gerador link whatsapp, link whatsapp personalizado, qr code whatsapp, link whatsapp bio instagram, api whatsapp, criar link wpp, mowebstudio">
+    <meta name="keywords" content="gerador link whatsapp, link whatsapp personalizado, qr code whatsapp, link whatsapp bio instagram, api whatsapp, criar link wpp, mowebstudio, mensagem pronta whatsapp">
     <meta name="robots" content="index, follow">
     
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "name": "Gerador de Link WhatsApp da Mowebstudio",
+          "operatingSystem": "Web",
+          "applicationCategory": "UtilitiesApplication",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+          },
+          "description": "Ferramenta gratuita para criar links personalizados do WhatsApp com mensagem pré-definida e QR Code instantâneo."
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "O link de WhatsApp gerado expira?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Não. Os links gerados utilizam a API oficial do WhatsApp e são vitalícios. Eles funcionarão para sempre enquanto seu número for o mesmo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quanto custa para criar um link personalizado?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "É 100% gratuito. Você pode gerar quantos links e QR Codes quiser sem nenhum custo."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "É seguro usar este gerador?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sim, totalmente seguro. Não armazenamos nenhum dado do seu número ou mensagens. Todo o processamento é feito no seu navegador."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -56,11 +104,8 @@
             gap: 15px;
         }
 
-        .top-cta-bar span {
-            opacity: 0.9;
-        }
+        .top-cta-bar span { opacity: 0.9; }
 
-        /* Botão Amarelo Ouro */
         .cta-button {
             background: #FFD700;
             color: #000000;
@@ -86,7 +131,7 @@
         .main-container-wrapper {
             flex: 1;
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Alterado para coluna para permitir conteúdo abaixo */
             align-items: center;
             width: 100%;
             padding: 40px 20px;
@@ -99,6 +144,7 @@
             width: 100%;
             align-items: flex-start;
             justify-content: center;
+            margin-bottom: 50px; /* Espaço para o conteúdo SEO */
         }
 
         /* Card Section */
@@ -325,7 +371,7 @@
         }
         button.secondary-btn:hover { background: #556677; }
 
-        /* Botão Download QR (Novo) */
+        /* Botão Download QR */
         button.btn-download-qr {
             width: 100%;
             padding: 10px;
@@ -382,29 +428,10 @@
         }
         .emoji-panel.show { display: block; }
         
-        .emoji-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 2px;
-        }
-        
-        .emoji-btn {
-            background: none;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 4px;
-            transition: background 0.1s;
-        }
+        .emoji-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+        .emoji-btn { background: none; border: none; font-size: 22px; cursor: pointer; padding: 5px; border-radius: 4px; transition: background 0.1s; }
         .emoji-btn:hover { background: #e0e0e0; }
-        
-        .emoji-loading {
-            text-align: center;
-            color: #777;
-            font-size: 13px;
-            padding: 10px;
-        }
+        .emoji-loading { text-align: center; color: #777; font-size: 13px; padding: 10px; }
 
         .footer-credit {
             margin-top: auto;
@@ -414,17 +441,113 @@
             color: #999;
             border-top: 1px solid #eee;
         }
-        .footer-credit a {
-            color: #666;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .footer-credit a:hover {
-            color: #25D366;
-        }
+        .footer-credit a { color: #666; text-decoration: none; transition: color 0.2s; }
+        .footer-credit a:hover { color: #25D366; }
 
         .toast { position: fixed; top: 20px; right: 20px; background: #333; color: white; padding: 12px 24px; border-radius: 50px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: none; z-index: 1000; font-size: 14px; }
         .toast.show { display: block; animation: slideIn 0.3s; }
+
+        /* --- ESTILOS SEO CONTENT (NOVO) --- */
+        .seo-section {
+            width: 100%;
+            max-width: 1000px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            color: #333;
+            margin-top: 20px;
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        .seo-section h2 {
+            color: #075E54;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        .seo-section h2:first-child { margin-top: 0; }
+        
+        .seo-section h3 {
+            color: #128C7E;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .seo-section p {
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .seo-section ul, .seo-section ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .seo-section li { margin-bottom: 8px; }
+
+        .seo-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .seo-feature-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #25D366;
+        }
+
+        .copy-box {
+            background: #eefbee;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed #25D366;
+            font-family: monospace;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+            position: relative;
+        }
+        .copy-box:hover { background: #dcf8dc; }
+        .copy-box::after {
+            content: "Clique para copiar";
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            color: #075E54;
+            opacity: 0.6;
+            font-family: sans-serif;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .faq-question {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+        }
+        .faq-answer {
+            color: #666;
+            display: none;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question { color: #075E54; }
 
         /* Responsividade */
         @media (max-width: 900px) {
@@ -440,6 +563,7 @@
             .phone-mockup { width: 280px; height: 520px; transform: none; margin-bottom: 20px; }
             .whatsapp-header-logo i { font-size: 50px; }
             .top-cta-bar span { font-size: 13px; }
+            .seo-section { padding: 25px; border-radius: 0; }
         }
     </style>
 </head>
@@ -556,9 +680,69 @@
                 </div>
             </div>
         </div>
+
+        <div class="seo-section">
+            <h2>Por que criar um Link Personalizado com QR Code?</h2>
+            <p>Usar um gerador de link para WhatsApp é a maneira mais eficiente de iniciar conversas com clientes sem que eles precisem salvar seu número na agenda. Com a nossa ferramenta, você cria uma URL curta (API wa.me) e um QR Code profissional instantaneamente.</p>
+            
+            <div class="seo-card-grid">
+                <div class="seo-feature-card">
+                    <h3><i class="fas fa-rocket"></i> Aumente a Conversão</h3>
+                    <p>Reduza a fricção no contato. Um clique leva o cliente direto para o chat com uma mensagem pronta.</p>
+                </div>
+                <div class="seo-feature-card">
+                    <h3><i class="fas fa-qrcode"></i> QR Code Grátis</h3>
+                    <p>Ideal para materiais impressos como cartões de visita, cardápios e panfletos. Basta o cliente apontar a câmera.</p>
+                </div>
+                <div class="seo-feature-card">
+                    <h3><i class="fab fa-instagram"></i> Perfeito para Bio</h3>
+                    <p>Cole o link na Bio do Instagram, TikTok ou Facebook e transforme seguidores em leads qualificados.</p>
+                </div>
+            </div>
+
+            <br>
+            <h2>Como funciona o Gerador de Link WhatsApp?</h2>
+            <ol>
+                <li><strong>Digite seu Número:</strong> Insira o DDD e o número do celular (WhatsApp Business ou Pessoal).</li>
+                <li><strong>Escreva a Mensagem (Opcional):</strong> Crie uma mensagem que seu cliente enviará automaticamente ao clicar no link. Isso ajuda a identificar a origem do contato.</li>
+                <li><strong>Gere e Compartilhe:</strong> Clique em "Gerar Link". Copie a URL ou baixe a imagem do QR Code para usar onde quiser.</li>
+            </ol>
+
+            <br>
+            <h2>Exemplos de Mensagens Prontas (Copie e Cole)</h2>
+            <p>Use estes modelos para facilitar o primeiro contato. Clique para copiar:</p>
+            
+            <h3>🛒 Para Vendas e Orçamentos</h3>
+            <div class="copy-box" onclick="copyText(this)">Olá! Vi seu perfil no Instagram e gostaria de solicitar um orçamento.</div>
+            <div class="copy-box" onclick="copyText(this)">Oi, tenho interesse nos produtos da promoção. Poderia me enviar o catálogo?</div>
+
+            <h3>📅 Para Agendamentos</h3>
+            <div class="copy-box" onclick="copyText(this)">Olá, gostaria de verificar a disponibilidade para agendar um horário esta semana.</div>
+            <div class="copy-box" onclick="copyText(this)">Oi! Gostaria de confirmar meu agendamento para amanhã.</div>
+
+            <h3>🛠️ Para Suporte</h3>
+            <div class="copy-box" onclick="copyText(this)">Preciso de ajuda com meu pedido. Poderia me dar um suporte?</div>
+
+            <br>
+            <h2>Perguntas Frequentes (FAQ)</h2>
+            <div class="faq-container">
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">O link gerado expira ou tem validade? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Não! O link criado utiliza a API oficial do WhatsApp e é baseado no seu número de telefone. Ele nunca expira, a menos que você mude seu número.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">É gratuito criar o link e o QR Code? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Sim, 100% gratuito. Você pode gerar quantos links e QR Codes quiser, para diferentes números ou com diferentes mensagens.</div>
+                </div>
+                <div class="faq-item" onclick="toggleFaq(this)">
+                    <div class="faq-question">Funciona para WhatsApp Business? <i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer">Perfeitamente. Funciona tanto para o WhatsApp Messenger (pessoal) quanto para o WhatsApp Business.</div>
+                </div>
+            </div>
+        </div>
     </div>
     
-    <div id="toast" class="toast">Link copiado com sucesso!</div>
+    <div id="toast" class="toast">Conteúdo copiado com sucesso!</div>
 
     <script>
         let generatedUrl = '';
@@ -582,6 +766,7 @@
             "😊","😂","🤣","😍","🙏","👍","🔥","✅","❤️","😭","😘","🤔","😊","🙄","😫","😩","😤","😠","😡","🤬","🤯","😳","🥵","🥶","😱","😨","😰","😥","😓","🤗","🤔","🤭","🤫","🤥","😶","😐","😑","😬","🙄","😯","😦","😧","😮","😲","🥱","😴","🤤","😪","😵","🤐","🥴","🤢","🤮","🤧","😷","🤒","🤕","🤑","🤠","😈","👿","👹","👺","🤡","💩","👻","💀","☠️","👽","👾","🤖"
         ];
 
+        // --- SCRIPTS EXISTENTES DO GERADOR ---
         async function loadCountries() {
             try {
                 const response = await fetch(COUNTRIES_URL);
@@ -630,13 +815,11 @@
                 if (!response.ok) throw new Error('Falha ao carregar arquivo local');
                 
                 const data = await response.json();
-                
                 if (data.emojis && Array.isArray(data.emojis)) {
                     renderEmojiButtons(data.emojis, false);
                 } else {
                     renderEmojiButtons(data, true); 
                 }
-                
             } catch (error) {
                 console.warn("Erro ao carregar array.json:", error);
                 renderEmojiButtons(FALLBACK_EMOJIS, false);
@@ -739,7 +922,6 @@
             textarea.focus();
         }
 
-        // Função de Download do QR Code
         function downloadQRCode() {
             const qrContainer = document.getElementById('qrcode');
             const img = qrContainer.querySelector('img');
@@ -806,9 +988,7 @@
         function copyLink() {
             if(!generatedUrl) return;
             navigator.clipboard.writeText(generatedUrl).then(() => {
-                const toast = document.getElementById('toast');
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 2000);
+                showToast("Link copiado com sucesso!");
             });
         }
 
@@ -821,6 +1001,35 @@
                 document.getElementById('emojiPanel').classList.remove('show');
             }
         });
+
+        // --- NOVOS SCRIPTS PARA FAQ E COPIA DE TEXTO ---
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+            const icon = element.querySelector('.fa-chevron-down');
+            if (element.classList.contains('active')) {
+                icon.style.transform = "rotate(180deg)";
+            } else {
+                icon.style.transform = "rotate(0deg)";
+            }
+        }
+
+        function copyText(element) {
+            const text = element.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("Mensagem copiada!");
+                element.style.background = "#dcf8dc";
+                setTimeout(() => {
+                    element.style.background = "#eefbee";
+                }, 500);
+            });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
     </script>
 </body>
 </html>
